@@ -2,17 +2,17 @@ require 'rails_helper'
 
 RSpec.describe 'Characters', type: :request do
   let(:character_id) { 1 }
-  let(:character_id_nonexistent ) { 1203 }
+  let(:character_id_nonexistent) { 1203 }
 
   context '#show' do
-    it 'quando achar' do
+    it 'when viewing Rick data' do
       get "/api/v1/characters/#{character_id}"
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to match_json_schema('character')
     end
 
-    it 'verificar quando não é para encontrar' do
+    it 'when the user is not found' do
       get "/api/v1/characters/#{character_id_nonexistent}"
 
       expect(response).to have_http_status(:not_found)
@@ -20,7 +20,7 @@ RSpec.describe 'Characters', type: :request do
   end
 
   context '#appears' do
-    it 'quando achar' do
+    it 'when the user will be Rick and will be found' do
       get "/api/v1/characters/#{character_id}/appears"
       expect(response).to have_http_status(:ok)
 
@@ -28,7 +28,7 @@ RSpec.describe 'Characters', type: :request do
       response.body.match? result_json
     end
 
-    it 'verificar quando não é para encontrar' do
+    it 'when the user will be Rick and was not found' do
       get "/api/v1/characters/#{character_id_nonexistent}/appears"
 
       expect(response).to have_http_status(:not_found)

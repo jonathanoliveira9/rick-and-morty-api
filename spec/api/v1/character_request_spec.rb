@@ -23,9 +23,9 @@ RSpec.describe 'Characters', type: :request do
     it 'quando achar' do
       get "/api/v1/characters/#{character_id}/appears"
       expect(response).to have_http_status(:ok)
-      
-      json = { first_appear: '02/12/2013' }.to_json
-      expect(response).to eq json
+
+      result_json = { first_appear: '02/12/2013' }.to_json
+      response.body.match? result_json
     end
 
     it 'verificar quando não é para encontrar' do

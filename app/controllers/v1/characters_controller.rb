@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# main controller
+# characters controller
 class Api::V1::CharactersController < Api::V1::ApiController
   before_action :set_character, only: %i[show appears]
 

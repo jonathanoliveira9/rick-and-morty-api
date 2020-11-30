@@ -1,15 +1,25 @@
 # frozen_string_literal: true
 
-# characters controller
+# main controller
 class Api::V1::CharactersController < Api::V1::ApiController
+  include RickMorty::Api
+
   before_action :set_character, only: %i[show appears]
 
   def show
     @character ? api_success(@character) : api_not_found
   end
 
+  def appears
+    episode_id = @character['episode'].first.tr('^0-9', '')
+    episode = by_id('episode', episode_id)
+
+
+    api_success(episode)
+  end
+
   def character_params
-    params.permit(:id)
+    params.permit(:character_id, :id, :details)
   end
 
   private
@@ -19,5 +29,9 @@ class Api::V1::CharactersController < Api::V1::ApiController
     return api_not_found('não foi encontrado') if @character['error'].present?
 
     @character
+  end
+
+  def format_date(date)
+    Date.parse(date).strftime('%d/%m/%Y')
   end
 end

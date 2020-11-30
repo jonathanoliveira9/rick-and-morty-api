@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "description": "Character on Rick and Morty",
+  "properties": {
+    "id": {
+      "type": "number",
+      "minimum": 0
+    },
+    "name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "species": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "episode": {
+      "type": "array"
+    }
+  }
+}

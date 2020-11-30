@@ -1,16 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe 'Characters', type: :request do
-  describe '#show' do
-    context 'quando achar' do
-      before do
-        get '/api/v1/characters/1'
-      end
+  let(:character_id) { 1 }
+  let(:character_id_nonexistent ) { 1203 }
 
-      it 'verificar o corpo' do
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to match_json_schema('character')
-      end
+  context '#show' do
+    it 'quando achar' do
+      get "/api/v1/characters/#{character_id}"
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to match_json_schema('character')
+    end
+
+    it 'verificar quando não é para encontrar' do
+      get "/api/v1/characters/#{character_id_nonexistent}"
+
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+
+  context '#appears' do
+    it 'quando achar' do
+      get "/api/v1/characters/#{character_id}/appears"
+      expect(response).to have_http_status(:ok)
+      
+      json = { first_appear: '02/12/2013' }.to_json
+      expect(response).to eq json
+    end
+
+    it 'verificar quando não é para encontrar' do
+      get "/api/v1/characters/#{character_id_nonexistent}/appears"
+
+      expect(response).to have_http_status(:not_found)
     end
   end
 end

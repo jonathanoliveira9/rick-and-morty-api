@@ -14,8 +14,10 @@ class Api::V1::CharactersController < Api::V1::ApiController
     episode_id = @character['episode'].first.tr('^0-9', '')
     episode = by_id('episode', episode_id)
 
+    result = { first_appear: format_date(episode['air_date']) }
+    result = result.merge(@character) if character_params[:details]
 
-    api_success(episode)
+    api_success(result)
   end
 
   def character_params

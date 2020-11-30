@@ -33,5 +33,15 @@ RSpec.describe 'Characters', type: :request do
 
       expect(response).to have_http_status(:not_found)
     end
+
+    it 'when I want to see more information by pulling the controller' do
+      get "/api/v1/characters/#{character_id}/appears", params: { details: true }
+
+      expect(response).to have_http_status(:ok)
+
+      result_json = { first_appear: '02/12/2013' }.to_json
+      response.body.match? result_json
+      expect(response.body).to match_json_schema('character')
+    end
   end
 end

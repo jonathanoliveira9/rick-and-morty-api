@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "description": "Character on Rick and Morty",
+  "properties": {
+    "id": {
+      "type": "number",
+      "minimum":0
+    }
+  }
+}

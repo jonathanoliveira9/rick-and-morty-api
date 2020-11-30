@@ -12,5 +12,13 @@ module RickMorty
     def get(url)
       JSON.parse((connection.get url).body)
     end
+
+    def by_id(url, id)
+      JSON.parse((connection.get "#{url}/#{id}/").body)
+    end
+
+    def search(url, str)
+      JSON.parse((connection.get "#{url}/?name=#{str}").body)['results']
+    end
   end
 end

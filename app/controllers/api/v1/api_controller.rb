@@ -8,7 +8,7 @@ class Api::V1::ApiController < ActionController::Base
     render json: data, status: :ok
   end
 
-  def api_not_found(data = {})
-    render json: { error: data }, status: :not_found
+  def api_not_found(data = nil)
+    render json: { error: data || 'não foi encontrado' }, status: :not_found
   end
 end

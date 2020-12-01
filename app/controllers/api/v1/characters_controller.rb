@@ -13,6 +13,7 @@ class Api::V1::CharactersController < Api::V1::ApiController
   def appears
     episode_id = @character['episode'].first.tr('^0-9', '')
     episode = by_id('episode', episode_id)
+    return api_not_found if episode['error'].present?
 
     result = { first_appear: format_date(episode['air_date']) }
     result = result.merge(@character) if character_params[:details]
@@ -28,7 +29,7 @@ class Api::V1::CharactersController < Api::V1::ApiController
 
   def set_character
     @character = by_id('character', character_params[:id] || character_params[:character_id])
-    return api_not_found('não foi encontrado') if @character['error'].present?
+    return api_not_found if @character['error'].present?
 
     @character
   end

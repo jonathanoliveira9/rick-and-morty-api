@@ -43,5 +43,12 @@ RSpec.describe 'Characters', type: :request do
       response.body.match? result_json
       expect(response.body).to match_json_schema('character')
     end
+
+    it 'large test loads' do
+      250.times do |index|
+        get "/api/v1/characters/#{index + 1}/appears"
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 end

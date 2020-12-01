@@ -44,6 +44,7 @@ RSpec.describe 'Characters', type: :request do
       expect(response.body).to match_json_schema('character')
     end
 
+    # is not necessary, but is always good to check
     it 'large test loads' do
       250.times do |index|
         get "/api/v1/characters/#{index + 1}/appears"

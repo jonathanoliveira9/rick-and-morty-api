@@ -35,6 +35,6 @@ class Api::V1::CharactersController < Api::V1::ApiController
   end
 
   def format_date(date)
-    Date.parse(date).strftime('%d/%m/%Y')
+    Date.parse(date)&.strftime('%d/%m/%Y')
   end
 end

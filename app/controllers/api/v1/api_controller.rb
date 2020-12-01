@@ -9,6 +9,6 @@ class Api::V1::ApiController < ActionController::Base
   end
 
   def api_not_found(data = nil)
-    render json: { error: data || 'não foi encontrado' }, status: :not_found
+    render json: { error: data || I18n.t('not_found') }, status: :not_found
   end
 end

@@ -19,5 +19,5 @@ docker-compose run web rspec -fd
 ou se você rodar diretamente com o rails: 
 
 ```
-rails rspec -fd
+rspec -fd
 ```
